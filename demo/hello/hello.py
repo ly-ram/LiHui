@@ -19,5 +19,21 @@ def helloworld():
 #URL中可以包含变量，将传入app.route()的字符串称为URL规则，而不是URL
 def greet(name):
     return '<h1> hello  {} </h1>'.format(name)
+
+
+@hello.route('/hi')
+@hello.route('/hi/<name>')
+def hi(name='programer'):
+    """
+        如果定义了这种URL,在浏览器中输入/hi则会报错
+        为了防止这种错误 可以使用默认值参数
+    """
+    return '<h1> hello  {} </h1>'.format(name)
+
+
+@hello.route('/wl', defaults={'name':'programmer'})
+@hello.route('/wl/<name>')
+def wl(name):
+    return '<h1> hello  {} </h1>'.format(name)
 if __name__ == '__main__':
     hello.run(debug=True)
